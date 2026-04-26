@@ -13,7 +13,8 @@ def home():
                 background: #000;
                 color: white;
                 text-align: center;
-                margin-top: 80px;
+                margin-top: 60px;
+                font-family: Arial;
             }
 
             svg {
@@ -40,6 +41,41 @@ def home():
                 0% { stroke-dashoffset: 0; }
                 100% { stroke-dashoffset: 400; }
             }
+
+            /* 🔥 Buttons Container */
+            .btn-container {
+                margin-top: 40px;
+            }
+
+            /* 🔥 Curved Buttons */
+            .btn {
+                padding: 12px 25px;
+                margin: 10px;
+                border: none;
+                border-radius: 30px; /* curved look */
+                font-size: 16px;
+                font-weight: bold;
+                color: white;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            .aws {
+                background: linear-gradient(45deg, #ff9900, #ff6600);
+            }
+
+            .azure {
+                background: linear-gradient(45deg, #007fff, #00c6ff);
+            }
+
+            .gcp {
+                background: linear-gradient(45deg, #ea4335, #34a853);
+            }
+
+            .btn:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 15px rgba(255,255,255,0.3);
+            }
         </style>
     </head>
     <body>
@@ -47,7 +83,6 @@ def home():
         <h2>Hello dosto welcome to DevOps batch 🚀</h2>
 
         <svg viewBox="0 0 200 100">
-            <!-- REAL infinity shape -->
             <path class="bg"
                 d="M 20 50 
                    C 20 10, 80 10, 100 50 
@@ -64,6 +99,13 @@ def home():
         </svg>
 
         <p>Docker DevOps App Running...</p>
+
+        <!-- 🔥 Buttons -->
+        <div class="btn-container">
+            <button class="btn aws">AWS</button>
+            <button class="btn azure">AZURE</button>
+            <button class="btn gcp">GCP</button>
+        </div>
 
     </body>
     </html>
