@@ -3,6 +3,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello dosto DevOps! Docker App Running 🚀"
+    return "Hello dosto welcome to the DevOps batch! Docker App Running 🚀"
 
 app.run(host="0.0.0.0", port=5000)
