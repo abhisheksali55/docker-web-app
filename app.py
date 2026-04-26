@@ -5,135 +5,181 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template_string("""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <style>
-            body {
-                background: #000;
-                color: white;
-                text-align: center;
-                margin: 0;
-                font-family: Arial;
-            }
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background: #000;
+    color: white;
+    text-align: center;
+    margin: 0;
+    font-family: Arial;
+}
 
-            /* NAVBAR */
-            .navbar {
-                display: flex;
-                justify-content: space-between;
-                padding: 15px 30px;
-                background: #111;
-            }
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: #111;
+}
 
-            /* AI BUTTON */
-            .ai-btn {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: #00ffcc;
-                color: black;
-                padding: 15px;
-                border-radius: 50%;
-                cursor: pointer;
-                font-size: 20px;
-            }
+/* SVG */
+svg {
+    width: 300px;
+    height: 200px;
+}
 
-            /* CHAT BOX */
-            .chatbox {
-                position: fixed;
-                bottom: 80px;
-                right: 20px;
-                width: 300px;
-                background: #111;
-                border-radius: 15px;
-                display: none;
-                box-shadow: 0 0 15px rgba(0,255,200,0.5);
-            }
+.bg {
+    fill: none;
+    stroke: #333;
+    stroke-width: 8;
+}
 
-            .chat-header {
-                padding: 10px;
-                background: #00ffcc;
-                color: black;
-                border-radius: 15px 15px 0 0;
-            }
+.snake {
+    fill: none;
+    stroke: #00ffcc;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 100;
+    animation: move 2s linear infinite;
+}
 
-            .chat-body {
-                height: 200px;
-                overflow-y: auto;
-                padding: 10px;
-                text-align: left;
-            }
+@keyframes move {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 400; }
+}
 
-            .chat-input {
-                display: flex;
-            }
+/* BUTTONS */
+.btn {
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
 
-            .chat-input input {
-                flex: 1;
-                padding: 10px;
-                border: none;
-                outline: none;
-            }
+.aws { background: orange; }
+.azure { background: blue; }
+.gcp { background: green; }
 
-            .chat-input button {
-                padding: 10px;
-                background: #00ffcc;
-                border: none;
-                cursor: pointer;
-            }
-        </style>
-    </head>
-    <body>
+/* SERVICES */
+.services {
+    display: none;
+    margin-top: 20px;
+}
 
-        <div class="navbar">
-            <div>☰ Menu</div>
-            <div>⚙️ Settings | 🔐 Login</div>
-        </div>
+.card {
+    background: #111;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
 
-        <h2>DevOps App Running 🚀</h2>
+/* AI BUTTON */
+.ai-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #00ffcc;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
 
-        <!-- 🤖 AI BUTTON -->
-        <div class="ai-btn" onclick="toggleChat()">🤖</div>
+/* CHATBOX */
+.chatbox {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background: #111;
+    display: none;
+    border-radius: 10px;
+}
 
-        <!-- 💬 CHATBOX -->
-        <div id="chatbox" class="chatbox">
-            <div class="chat-header">AI Assistant</div>
-            <div id="chat-body" class="chat-body"></div>
-            <div class="chat-input">
-                <input id="msg" placeholder="Type message...">
-                <button onclick="sendMsg()">Send</button>
-            </div>
-        </div>
+</style>
+</head>
 
-        <script>
-            function toggleChat() {
-                let box = document.getElementById("chatbox");
-                box.style.display = box.style.display === "block" ? "none" : "block";
-            }
+<body>
 
-            function sendMsg() {
-                let input = document.getElementById("msg");
-                let chat = document.getElementById("chat-body");
+<div class="navbar">
+    <div>☰ Menu</div>
+    <div>⚙️ Settings | 🔐 Login</div>
+</div>
 
-                let userMsg = input.value;
-                if(userMsg === "") return;
+<h2>DevOps App 🚀</h2>
 
-                chat.innerHTML += "<p><b>You:</b> " + userMsg + "</p>";
+<svg viewBox="0 0 200 100">
+    <path class="bg"
+        d="M 20 50 C 20 10, 80 10, 100 50 
+           C 120 90, 180 90, 180 50 
+           C 180 10, 120 10, 100 50 
+           C 80 90, 20 90, 20 50" />
+    <path class="snake"
+        d="M 20 50 C 20 10, 80 10, 100 50 
+           C 120 90, 180 90, 180 50 
+           C 180 10, 120 10, 100 50 
+           C 80 90, 20 90, 20 50" />
+</svg>
 
-                // Simple AI reply
-                let reply = "I am your DevOps AI 🤖";
-                if(userMsg.toLowerCase().includes("aws")) reply = "AWS is cloud platform ☁️";
-                if(userMsg.toLowerCase().includes("docker")) reply = "Docker is container tool 🐳";
+<p>Docker DevOps App Running...</p>
 
-                chat.innerHTML += "<p><b>AI:</b> " + reply + "</p>";
+<!-- BUTTONS -->
+<div>
+    <button class="btn aws" onclick="show('aws')">AWS</button>
+    <button class="btn azure" onclick="show('azure')">AZURE</button>
+    <button class="btn gcp" onclick="show('gcp')">GCP</button>
+</div>
 
-                input.value = "";
-                chat.scrollTop = chat.scrollHeight;
-            }
-        </script>
+<!-- AWS -->
+<div id="aws" class="services">
+    <div class="card">EC2</div>
+    <div class="card">S3</div>
+    <div class="card">Lambda</div>
+</div>
 
-    </body>
-    </html>
-    """)
+<!-- AZURE -->
+<div id="azure" class="services">
+    <div class="card">VM</div>
+    <div class="card">Blob</div>
+    <div class="card">Functions</div>
+</div>
+
+<!-- GCP -->
+<div id="gcp" class="services">
+    <div class="card">Compute</div>
+    <div class="card">Storage</div>
+    <div class="card">BigQuery</div>
+</div>
+
+<!-- AI BUTTON -->
+<div class="ai-btn" onclick="toggleChat()">🤖</div>
+
+<div id="chatbox" class="chatbox">
+    <div style="padding:10px;">AI Chat</div>
+</div>
+
+<script>
+function show(id){
+    document.getElementById("aws").style.display="none";
+    document.getElementById("azure").style.display="none";
+    document.getElementById("gcp").style.display="none";
+    document.getElementById(id).style.display="block";
+}
+
+function toggleChat(){
+    let box = document.getElementById("chatbox");
+    box.style.display = box.style.display==="block"?"none":"block";
+}
+</script>
+
+</body>
+</html>
+""")
 
 app.run(host="0.0.0.0", port=5000)
