@@ -10,8 +10,8 @@ def home():
 <head>
 <style>
 body {
-    background: #000;
-    color: white;
+    background: #ffffff;
+    color: black;
     text-align: center;
     margin: 0;
     font-family: Arial;
@@ -22,7 +22,9 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 15px 30px;
-    background: #111;
+    background: #f0f0f0;
+    color: black;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 /* SVG */
@@ -33,13 +35,13 @@ svg {
 
 .bg {
     fill: none;
-    stroke: #333;
+    stroke: #ccc;
     stroke-width: 8;
 }
 
 .snake {
     fill: none;
-    stroke: #00ffcc;
+    stroke: #0077cc;
     stroke-width: 8;
     stroke-linecap: round;
     stroke-dasharray: 100;
@@ -62,9 +64,9 @@ svg {
     cursor: pointer;
 }
 
-.aws { background: orange; }
-.azure { background: blue; }
-.gcp { background: green; }
+.aws { background: #ff9900; }
+.azure { background: #007fff; }
+.gcp { background: #34a853; }
 
 /* SERVICES */
 .services {
@@ -73,11 +75,13 @@ svg {
 }
 
 .card {
-    background: #111;
+    background: #f5f5f5;
+    color: black;
     padding: 10px 20px;
     margin: 10px;
     border-radius: 10px;
     display: inline-block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* AI BUTTON */
@@ -85,7 +89,8 @@ svg {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #00ffcc;
+    background: #0077cc;
+    color: white;
     padding: 15px;
     border-radius: 50%;
     cursor: pointer;
@@ -97,11 +102,12 @@ svg {
     bottom: 80px;
     right: 20px;
     width: 300px;
-    background: #111;
+    background: white;
+    color: black;
     display: none;
     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
-
 </style>
 </head>
 
