@@ -42,17 +42,15 @@ def home():
                 100% { stroke-dashoffset: 400; }
             }
 
-            /* 🔥 Buttons Container */
             .btn-container {
-                margin-top: 40px;
+                margin-top: 30px;
             }
 
-            /* 🔥 Curved Buttons */
             .btn {
                 padding: 12px 25px;
                 margin: 10px;
                 border: none;
-                border-radius: 30px; /* curved look */
+                border-radius: 30px;
                 font-size: 16px;
                 font-weight: bold;
                 color: white;
@@ -75,6 +73,21 @@ def home():
             .btn:hover {
                 transform: scale(1.1);
                 box-shadow: 0 0 15px rgba(255,255,255,0.3);
+            }
+
+            /* 🔥 Services box */
+            .services {
+                margin-top: 20px;
+                display: none;
+            }
+
+            .card {
+                background: #111;
+                padding: 10px 20px;
+                margin: 10px;
+                border-radius: 15px;
+                display: inline-block;
+                box-shadow: 0 0 10px rgba(0,255,200,0.2);
             }
         </style>
     </head>
@@ -100,12 +113,31 @@ def home():
 
         <p>Docker DevOps App Running...</p>
 
-        <!-- 🔥 Buttons -->
         <div class="btn-container">
-            <button class="btn aws">AWS</button>
+            <button class="btn aws" onclick="showAWS()">AWS</button>
             <button class="btn azure">AZURE</button>
             <button class="btn gcp">GCP</button>
         </div>
+
+        <!-- 🔥 AWS Services -->
+        <div id="aws-services" class="services">
+            <div class="card">EC2</div>
+            <div class="card">S3</div>
+            <div class="card">Lambda</div>
+            <div class="card">RDS</div>
+            <div class="card">CloudFront</div>
+        </div>
+
+        <script>
+            function showAWS() {
+                let box = document.getElementById("aws-services");
+                if (box.style.display === "none" || box.style.display === "") {
+                    box.style.display = "block";
+                } else {
+                    box.style.display = "none";
+                }
+            }
+        </script>
 
     </body>
     </html>
