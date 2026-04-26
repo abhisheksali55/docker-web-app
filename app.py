@@ -13,8 +13,37 @@ def home():
                 background: #000;
                 color: white;
                 text-align: center;
-                margin-top: 60px;
+                margin: 0;
                 font-family: Arial;
+            }
+
+            /* 🔥 NAVBAR */
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 30px;
+                background: #111;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            }
+
+            .nav-left {
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            .nav-right span {
+                margin-left: 20px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            .nav-right span:hover {
+                color: #00ffcc;
+            }
+
+            h2 {
+                margin-top: 40px;
             }
 
             svg {
@@ -67,7 +96,6 @@ def home():
                 box-shadow: 0 0 15px rgba(255,255,255,0.3);
             }
 
-            /* 🔥 Services Section */
             .services {
                 display: none;
                 margin-top: 20px;
@@ -91,6 +119,15 @@ def home():
     </head>
     <body>
 
+        <!-- 🔥 NAVBAR -->
+        <div class="navbar">
+            <div class="nav-left">☰ Menu</div>
+            <div class="nav-right">
+                <span>⚙️ Settings</span>
+                <span>🔐 Login</span>
+            </div>
+        </div>
+
         <h2>Hello dosto welcome to DevOps batch 🚀</h2>
 
         <svg viewBox="0 0 200 100">
@@ -111,14 +148,12 @@ def home():
 
         <p>Docker DevOps App Running...</p>
 
-        <!-- 🔥 Buttons -->
         <div class="btn-container">
             <button class="btn aws" onclick="showSection('aws')">AWS</button>
             <button class="btn azure" onclick="showSection('azure')">AZURE</button>
             <button class="btn gcp" onclick="showSection('gcp')">GCP</button>
         </div>
 
-        <!-- 🔥 AWS -->
         <div id="aws" class="services">
             <div class="card">EC2 - Virtual Server</div>
             <div class="card">S3 - Storage</div>
@@ -127,7 +162,6 @@ def home():
             <div class="card">CloudFront - CDN</div>
         </div>
 
-        <!-- 🔥 AZURE -->
         <div id="azure" class="services">
             <div class="card">VM - Virtual Machine</div>
             <div class="card">Blob Storage</div>
@@ -136,7 +170,6 @@ def home():
             <div class="card">App Service</div>
         </div>
 
-        <!-- 🔥 GCP -->
         <div id="gcp" class="services">
             <div class="card">Compute Engine</div>
             <div class="card">Cloud Storage</div>
@@ -147,12 +180,9 @@ def home():
 
         <script>
             function showSection(id) {
-                // sab hide karo
                 document.getElementById("aws").style.display = "none";
                 document.getElementById("azure").style.display = "none";
                 document.getElementById("gcp").style.display = "none";
-
-                // selected show karo
                 document.getElementById(id).style.display = "block";
             }
         </script>
