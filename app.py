@@ -17,173 +17,118 @@ def home():
                 font-family: Arial;
             }
 
-            /* 🔥 NAVBAR */
+            /* NAVBAR */
             .navbar {
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
                 padding: 15px 30px;
                 background: #111;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             }
 
-            .nav-left {
+            /* AI BUTTON */
+            .ai-btn {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #00ffcc;
+                color: black;
+                padding: 15px;
+                border-radius: 50%;
+                cursor: pointer;
                 font-size: 20px;
-                cursor: pointer;
             }
 
-            .nav-right span {
-                margin-left: 20px;
-                cursor: pointer;
-                transition: 0.3s;
-            }
-
-            .nav-right span:hover {
-                color: #00ffcc;
-            }
-
-            h2 {
-                margin-top: 40px;
-            }
-
-            svg {
+            /* CHAT BOX */
+            .chatbox {
+                position: fixed;
+                bottom: 80px;
+                right: 20px;
                 width: 300px;
-                height: 200px;
-            }
-
-            .bg {
-                fill: none;
-                stroke: #333;
-                stroke-width: 8;
-            }
-
-            .snake {
-                fill: none;
-                stroke: #00ffcc;
-                stroke-width: 8;
-                stroke-linecap: round;
-                stroke-dasharray: 100;
-                animation: move 2s linear infinite;
-            }
-
-            @keyframes move {
-                0% { stroke-dashoffset: 0; }
-                100% { stroke-dashoffset: 400; }
-            }
-
-            .btn-container {
-                margin-top: 30px;
-            }
-
-            .btn {
-                padding: 12px 25px;
-                margin: 10px;
-                border: none;
-                border-radius: 30px;
-                font-size: 16px;
-                font-weight: bold;
-                color: white;
-                cursor: pointer;
-                transition: 0.3s;
-            }
-
-            .aws { background: linear-gradient(45deg, #ff9900, #ff6600); }
-            .azure { background: linear-gradient(45deg, #007fff, #00c6ff); }
-            .gcp { background: linear-gradient(45deg, #ea4335, #34a853); }
-
-            .btn:hover {
-                transform: scale(1.1);
-                box-shadow: 0 0 15px rgba(255,255,255,0.3);
-            }
-
-            .services {
-                display: none;
-                margin-top: 20px;
-            }
-
-            .card {
                 background: #111;
-                padding: 12px 20px;
-                margin: 10px;
                 border-radius: 15px;
-                display: inline-block;
-                box-shadow: 0 0 10px rgba(0,255,200,0.2);
-                transition: 0.3s;
+                display: none;
+                box-shadow: 0 0 15px rgba(0,255,200,0.5);
             }
 
-            .card:hover {
-                transform: scale(1.1);
-                box-shadow: 0 0 20px rgba(0,255,200,0.5);
+            .chat-header {
+                padding: 10px;
+                background: #00ffcc;
+                color: black;
+                border-radius: 15px 15px 0 0;
+            }
+
+            .chat-body {
+                height: 200px;
+                overflow-y: auto;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .chat-input {
+                display: flex;
+            }
+
+            .chat-input input {
+                flex: 1;
+                padding: 10px;
+                border: none;
+                outline: none;
+            }
+
+            .chat-input button {
+                padding: 10px;
+                background: #00ffcc;
+                border: none;
+                cursor: pointer;
             }
         </style>
     </head>
     <body>
 
-        <!-- 🔥 NAVBAR -->
         <div class="navbar">
-            <div class="nav-left">☰ Menu</div>
-            <div class="nav-right">
-                <span>⚙️ Settings</span>
-                <span>🔐 Login</span>
+            <div>☰ Menu</div>
+            <div>⚙️ Settings | 🔐 Login</div>
+        </div>
+
+        <h2>DevOps App Running 🚀</h2>
+
+        <!-- 🤖 AI BUTTON -->
+        <div class="ai-btn" onclick="toggleChat()">🤖</div>
+
+        <!-- 💬 CHATBOX -->
+        <div id="chatbox" class="chatbox">
+            <div class="chat-header">AI Assistant</div>
+            <div id="chat-body" class="chat-body"></div>
+            <div class="chat-input">
+                <input id="msg" placeholder="Type message...">
+                <button onclick="sendMsg()">Send</button>
             </div>
         </div>
 
-        <h2>Hello dosto welcome to DevOps batch 🚀</h2>
-
-        <svg viewBox="0 0 200 100">
-            <path class="bg"
-                d="M 20 50 
-                   C 20 10, 80 10, 100 50 
-                   C 120 90, 180 90, 180 50 
-                   C 180 10, 120 10, 100 50 
-                   C 80 90, 20 90, 20 50" />
-
-            <path class="snake"
-                d="M 20 50 
-                   C 20 10, 80 10, 100 50 
-                   C 120 90, 180 90, 180 50 
-                   C 180 10, 120 10, 100 50 
-                   C 80 90, 20 90, 20 50" />
-        </svg>
-
-        <p>Docker DevOps App Running...</p>
-
-        <div class="btn-container">
-            <button class="btn aws" onclick="showSection('aws')">AWS</button>
-            <button class="btn azure" onclick="showSection('azure')">AZURE</button>
-            <button class="btn gcp" onclick="showSection('gcp')">GCP</button>
-        </div>
-
-        <div id="aws" class="services">
-            <div class="card">EC2 - Virtual Server</div>
-            <div class="card">S3 - Storage</div>
-            <div class="card">Lambda - Serverless</div>
-            <div class="card">RDS - Database</div>
-            <div class="card">CloudFront - CDN</div>
-        </div>
-
-        <div id="azure" class="services">
-            <div class="card">VM - Virtual Machine</div>
-            <div class="card">Blob Storage</div>
-            <div class="card">Azure Functions</div>
-            <div class="card">SQL Database</div>
-            <div class="card">App Service</div>
-        </div>
-
-        <div id="gcp" class="services">
-            <div class="card">Compute Engine</div>
-            <div class="card">Cloud Storage</div>
-            <div class="card">Cloud Functions</div>
-            <div class="card">BigQuery</div>
-            <div class="card">App Engine</div>
-        </div>
-
         <script>
-            function showSection(id) {
-                document.getElementById("aws").style.display = "none";
-                document.getElementById("azure").style.display = "none";
-                document.getElementById("gcp").style.display = "none";
-                document.getElementById(id).style.display = "block";
+            function toggleChat() {
+                let box = document.getElementById("chatbox");
+                box.style.display = box.style.display === "block" ? "none" : "block";
+            }
+
+            function sendMsg() {
+                let input = document.getElementById("msg");
+                let chat = document.getElementById("chat-body");
+
+                let userMsg = input.value;
+                if(userMsg === "") return;
+
+                chat.innerHTML += "<p><b>You:</b> " + userMsg + "</p>";
+
+                // Simple AI reply
+                let reply = "I am your DevOps AI 🤖";
+                if(userMsg.toLowerCase().includes("aws")) reply = "AWS is cloud platform ☁️";
+                if(userMsg.toLowerCase().includes("docker")) reply = "Docker is container tool 🐳";
+
+                chat.innerHTML += "<p><b>AI:</b> " + reply + "</p>";
+
+                input.value = "";
+                chat.scrollTop = chat.scrollHeight;
             }
         </script>
 
