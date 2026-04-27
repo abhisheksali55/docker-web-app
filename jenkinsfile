@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git url: 'https://github.com/abhisheksali55/docker-web-app.git', branch: 'main'
+            }
+        }
+         stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t my-app .'
+            }
+        }
+          stage('Run Container') {
+    steps {
+        sh '''
+        docker stop my-app-container || true
+        docker rm my-app-container || true
+        docker run -d -p 5000:5000 --name my-app-container my-app
+        '''
+    }
+}
+   
+        stage('DEBUG') {
+    steps {
+        sh 'echo WORKSPACE=$WORKSPACE'
+        sh 'pwd'
+        sh 'ls -la'
+    }
+}
+stage('push to Docker Hub') {
+    steps {
+        withCredentials([usernamePassword(
+            credentialsId: 'dockerhub-creds',
+            usernameVariable: 'USER',
+            passwordVariable: 'PASS'
+        )]) {
+            sh '''
+            echo $PASS | docker login -u $USER --password-stdin
+            docker tag my-app $USER/my-app:latest
+            docker push $USER/my-app:latest
+            '''
+        }
+    }
+}
+    }
+}
