@@ -10,48 +10,30 @@ def home():
 <head>
 <style>
 body {
-    background: #ffffff;
-    color: black;
-    text-align: center;
     margin: 0;
+    color: white;
+    text-align: center;
     font-family: Arial;
     overflow-x: hidden;
 }
 
-/* 🌌 BLACK HOLE */
-.blackhole {
+/* 🌌 FULL SCREEN BLACK HOLE */
+.blackhole-bg {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 300px;
-    height: 300px;
+    width: 120%;
+    height: 120%;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: radial-gradient(circle, black 30%, #222 60%, transparent 70%);
-    animation: spin 10s linear infinite;
+    background: url('/static/blackhole.jpg') center/cover no-repeat;
+    animation: spin 60s linear infinite;
     z-index: -1;
-}
-
-/* glowing ring */
-.blackhole::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 3px solid #0077cc;
-    box-shadow: 0 0 30px #0077cc;
-    animation: spinReverse 6s linear infinite;
+    filter: brightness(0.7) contrast(1.2);
 }
 
 @keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes spinReverse {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(-360deg); }
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.1); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.1); }
 }
 
 /* NAVBAR */
@@ -59,9 +41,8 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 15px 30px;
-    background: #f0f0f0;
-    color: black;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: rgba(0,0,0,0.6);
+    color: white;
 }
 
 /* SVG */
@@ -78,7 +59,7 @@ svg {
 
 .snake {
     fill: none;
-    stroke: #0077cc;
+    stroke: #00ffcc;
     stroke-width: 8;
     stroke-linecap: round;
     stroke-dasharray: 100;
@@ -112,8 +93,8 @@ svg {
 }
 
 .card {
-    background: #f5f5f5;
-    color: black;
+    background: rgba(0,0,0,0.6);
+    color: white;
     padding: 10px 20px;
     margin: 10px;
     border-radius: 10px;
@@ -125,8 +106,8 @@ svg {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #0077cc;
-    color: white;
+    background: #00ffcc;
+    color: black;
     padding: 15px;
     border-radius: 50%;
     cursor: pointer;
@@ -138,8 +119,8 @@ svg {
     bottom: 80px;
     right: 20px;
     width: 300px;
-    background: white;
-    color: black;
+    background: rgba(0,0,0,0.8);
+    color: white;
     display: none;
     border-radius: 10px;
 }
@@ -149,7 +130,7 @@ svg {
 <body>
 
 <!-- 🌌 BLACK HOLE -->
-<div class="blackhole"></div>
+<div class="blackhole-bg"></div>
 
 <div class="navbar">
     <div>☰ Menu</div>
