@@ -15,6 +15,43 @@ body {
     text-align: center;
     margin: 0;
     font-family: Arial;
+    overflow-x: hidden;
+}
+
+/* 🌌 BLACK HOLE */
+.blackhole {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, black 30%, #222 60%, transparent 70%);
+    animation: spin 10s linear infinite;
+    z-index: -1;
+}
+
+/* glowing ring */
+.blackhole::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #0077cc;
+    box-shadow: 0 0 30px #0077cc;
+    animation: spinReverse 6s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spinReverse {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
 }
 
 /* NAVBAR */
@@ -81,7 +118,6 @@ svg {
     margin: 10px;
     border-radius: 10px;
     display: inline-block;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* AI BUTTON */
@@ -106,19 +142,21 @@ svg {
     color: black;
     display: none;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 </style>
 </head>
 
 <body>
 
+<!-- 🌌 BLACK HOLE -->
+<div class="blackhole"></div>
+
 <div class="navbar">
     <div>☰ Menu</div>
     <div>⚙️ Settings | 🔐 Login</div>
 </div>
 
-<h2>AWS DevOps SPACE UNIVERSE 🛰️</h2>
+<h2>SPACE UNIVERSE 🪐</h2>
 
 <svg viewBox="0 0 200 100">
     <path class="bg"
@@ -135,35 +173,30 @@ svg {
 
 <p>Docker DevOps App Running...</p>
 
-<!-- BUTTONS -->
 <div>
     <button class="btn aws" onclick="show('aws')">AWS</button>
     <button class="btn azure" onclick="show('azure')">AZURE</button>
     <button class="btn gcp" onclick="show('gcp')">GCP</button>
 </div>
 
-<!-- AWS -->
 <div id="aws" class="services">
     <div class="card">EC2</div>
     <div class="card">S3</div>
     <div class="card">Lambda</div>
 </div>
 
-<!-- AZURE -->
 <div id="azure" class="services">
     <div class="card">VM</div>
     <div class="card">Blob</div>
     <div class="card">Functions</div>
 </div>
 
-<!-- GCP -->
 <div id="gcp" class="services">
     <div class="card">Compute</div>
     <div class="card">Storage</div>
     <div class="card">BigQuery</div>
 </div>
 
-<!-- AI BUTTON -->
 <div class="ai-btn" onclick="toggleChat()">🤖</div>
 
 <div id="chatbox" class="chatbox">
