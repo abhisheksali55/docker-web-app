@@ -17,7 +17,7 @@ body {
     overflow-x: hidden;
 }
 
-/* 🌌 FULL SCREEN BLACK HOLE */
+/* 🌌 BLACK HOLE BACKGROUND */
 .blackhole-bg {
     position: fixed;
     top: 50%;
@@ -25,12 +25,49 @@ body {
     width: 120%;
     height: 120%;
     transform: translate(-50%, -50%);
-    background: url('/static/blackhole.jpg') center/cover no-repeat;
-    animation: spin 60s linear infinite;
-    z-index: -1;
+    background: url("{{ url_for('static', filename='blackhole.jpg') }}") center/cover no-repeat;
+    animation: spin 80s linear infinite;
+    z-index: -2;
     filter: brightness(0.7) contrast(1.2);
 }
 
+/* 🌟 STARS */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.stars::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    box-shadow:
+        20px 30px white,
+        80px 120px white,
+        150px 200px white,
+        300px 50px white,
+        450px 180px white,
+        600px 100px white,
+        750px 220px white,
+        900px 90px white,
+        1100px 160px white,
+        1300px 60px white,
+        1500px 200px white;
+    animation: blink 2s infinite alternate;
+}
+
+@keyframes blink {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* 🔄 BLACK HOLE ROTATION */
 @keyframes spin {
     0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.1); }
     100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.1); }
@@ -42,7 +79,6 @@ body {
     justify-content: space-between;
     padding: 15px 30px;
     background: rgba(0,0,0,0.6);
-    color: white;
 }
 
 /* SVG */
@@ -94,7 +130,6 @@ svg {
 
 .card {
     background: rgba(0,0,0,0.6);
-    color: white;
     padding: 10px 20px;
     margin: 10px;
     border-radius: 10px;
@@ -120,7 +155,6 @@ svg {
     right: 20px;
     width: 300px;
     background: rgba(0,0,0,0.8);
-    color: white;
     display: none;
     border-radius: 10px;
 }
@@ -129,9 +163,11 @@ svg {
 
 <body>
 
-<!-- 🌌 BLACK HOLE -->
+<!-- 🌌 BACKGROUND -->
 <div class="blackhole-bg"></div>
+<div class="stars"></div>
 
+<!-- NAVBAR -->
 <div class="navbar">
     <div>☰ Menu</div>
     <div>⚙️ Settings | 🔐 Login</div>
@@ -139,6 +175,7 @@ svg {
 
 <h2>SPACE UNIVERSE 🪐</h2>
 
+<!-- INFINITY SNAKE -->
 <svg viewBox="0 0 200 100">
     <path class="bg"
         d="M 20 50 C 20 10, 80 10, 100 50 
@@ -154,12 +191,14 @@ svg {
 
 <p>Docker DevOps App Running...</p>
 
+<!-- BUTTONS -->
 <div>
     <button class="btn aws" onclick="show('aws')">AWS</button>
     <button class="btn azure" onclick="show('azure')">AZURE</button>
     <button class="btn gcp" onclick="show('gcp')">GCP</button>
 </div>
 
+<!-- SERVICES -->
 <div id="aws" class="services">
     <div class="card">EC2</div>
     <div class="card">S3</div>
@@ -178,6 +217,7 @@ svg {
     <div class="card">BigQuery</div>
 </div>
 
+<!-- AI BUTTON -->
 <div class="ai-btn" onclick="toggleChat()">🤖</div>
 
 <div id="chatbox" class="chatbox">
