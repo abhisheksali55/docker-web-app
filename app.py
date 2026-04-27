@@ -133,7 +133,7 @@ svg {
            C 80 90, 20 90, 20 50" />
 </svg>
 
-<p>Docker DevOps App Running...</p>
+<p>Docker AWS DevOps App Running...</p>
 
 <!-- BUTTONS -->
 <div>
