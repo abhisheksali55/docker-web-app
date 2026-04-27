@@ -118,7 +118,7 @@ svg {
     <div>⚙️ Settings | 🔐 Login</div>
 </div>
 
-<h2> Welcome DevOps Univers 🚀</h2>
+<h2>DevOps App 🚀</h2>
 
 <svg viewBox="0 0 200 100">
     <path class="bg"
@@ -133,7 +133,7 @@ svg {
            C 80 90, 20 90, 20 50" />
 </svg>
 
-<p>Docker AWS DevOps App Running...</p>
+<p>Docker DevOps App Running...</p>
 
 <!-- BUTTONS -->
 <div>
