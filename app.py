@@ -118,7 +118,7 @@ svg {
     <div>⚙️ Settings | 🔐 Login</div>
 </div>
 
-<h2>AWS DevOps Univers 🚀</h2>
+<h2>AWS DevOps SPACE UNIVERSE 🛰️</h2>
 
 <svg viewBox="0 0 200 100">
     <path class="bg"
