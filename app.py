@@ -1,121 +1,118 @@
+from flask import Flask, render_template_string, request
+
+app = Flask(__name__)
+
+HTML = """
 <!DOCTYPE html>
 <html>
 <head>
     <title>EB Bank</title>
     <style>
         body {
-            font-family: Arial;
-            margin: 0;
-            background: #0f172a;
-            color: white;
+            margin:0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg,#0f172a,#1e293b);
+            color:white;
+        }
+
+        .navbar {
+            background:#020617;
+            padding:15px;
+            text-align:center;
+            font-size:22px;
+            font-weight:bold;
         }
 
         .container {
-            width: 300px;
-            margin: 100px auto;
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
+            width:350px;
+            margin:80px auto;
+            background:#1e293b;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0px 0px 20px rgba(0,0,0,0.5);
         }
 
         input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border:none;
+            border-radius:8px;
         }
 
         button {
-            padding: 10px 20px;
-            background: #22c55e;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .dashboard {
-            display: none;
-            padding: 20px;
+            width:100%;
+            padding:12px;
+            background:#22c55e;
+            border:none;
+            border-radius:8px;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
         }
 
         .card {
-            background: #1e293b;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 10px;
+            background:#0f172a;
+            padding:15px;
+            border-radius:10px;
+            margin-top:15px;
         }
 
-        .topbar {
-            background: #020617;
-            padding: 15px;
-            text-align: center;
-            font-size: 20px;
+        .success {
+            color:#22c55e;
         }
     </style>
 </head>
 
 <body>
 
-<div class="topbar">🏦 EB Bank</div>
+<div class="navbar">🏦 EB Bank</div>
 
-<!-- LOGIN -->
-<div class="container" id="loginBox">
-    <h2>Login</h2>
-    <input type="text" id="user" placeholder="Username"><br>
-    <input type="password" id="pass" placeholder="Password"><br>
-    <button onclick="login()">Login</button>
-</div>
+<div class="container">
 
-<!-- DASHBOARD -->
-<div class="dashboard" id="dashboard">
+{% if not logged %}
+    <h2>Secure Login</h2>
+    <form method="POST">
+        <input name="user" placeholder="Username" required>
+        <input name="pass" type="password" placeholder="Password" required>
+        <button>Login</button>
+    </form>
+{% else %}
+    <h2>Welcome, Admin</h2>
 
     <div class="card">
-        <h3>Account Balance</h3>
-        <h2 id="balance">₹50,000</h2>
+        <h3>Balance</h3>
+        <h2>₹50,000</h2>
     </div>
 
     <div class="card">
         <h3>Send Money</h3>
-        <input type="number" id="amount" placeholder="Enter Amount">
-        <button onclick="sendMoney()">Send</button>
+        <form method="POST">
+            <input name="amount" type="number" placeholder="Enter Amount" required>
+            <button name="send">Transfer</button>
+        </form>
     </div>
 
-    <div class="card">
-        <h3>Transaction Status</h3>
-        <p id="status">No transactions yet</p>
-    </div>
+    {% if msg %}
+        <p class="success">{{msg}}</p>
+    {% endif %}
+{% endif %}
 
 </div>
 
-<script>
-function login() {
-    let u = document.getElementById("user").value;
-    let p = document.getElementById("pass").value;
-
-    if (u === "admin" && p === "1234") {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
-    } else {
-        alert("Invalid Login");
-    }
-}
-
-function sendMoney() {
-    let amt = document.getElementById("amount").value;
-    let bal = 50000;
-
-    if (amt > 0 && amt <= bal) {
-        bal -= amt;
-        document.getElementById("balance").innerText = "₹" + bal;
-        document.getElementById("status").innerText = "Sent ₹" + amt + " successfully";
-    } else {
-        alert("Invalid Amount");
-    }
-}
-</script>
-
 </body>
 </html>
+"""
+
+@app.route("/", methods=["GET","POST"])
+def home():
+    if request.method == "POST":
+        if "user" in request.form:
+            if request.form["user"]=="admin" and request.form["pass"]=="1234":
+                return render_template_string(HTML, logged=True, msg="")
+        if "amount" in request.form:
+            return render_template_string(HTML, logged=True, msg="✅ Transaction Successful")
+    return render_template_string(HTML, logged=False, msg="")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
