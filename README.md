@@ -1,26 +1,24 @@
 ```mermaid
 flowchart LR
-    subgraph TOP[""]
-        direction LR
-        EC2["☁️ Amazon EC2\nCode Server"]
-        GH["🐙 GitHub\nCode Push"]
-        DOC["🐳 Docker\nContainerize"]
-        DC["🐙 Docker Compose\nMulti-container"]
-        JEN["⚙️ Jenkins\nCI/CD Engine"]
-    end
-
-    subgraph BOT[""]
-        direction RL
-        WH["🔔 Webhook\nUsers Notified ✅"]
-        ACC["🌐 Access\nApplication"]
-        CON["🚀 Container\nApp Running"]
-        IMG["📦 Build Docker\nImage"]
-        SH["💻 Shell Script\nBuild Commands"]
-    end
+    EC2["☁️ **Amazon EC2**\nCode Server"] 
+    GH["🐙 **GitHub**\nCode Push"] 
+    DOC["🐳 **Docker**\nContainerize App"] 
+    DC["🐙 **Docker Compose**\nMulti-container"] 
+    JEN["⚙️ **Jenkins**\nCI/CD Engine"]
+    SH["💻 **Shell Script**\nBuild Commands"]
+    IMG["📦 **Build Docker Image**\ndocker build -t app"]
+    CON["🚀 **Container Running**\nApp is Live!"]
+    ACC["🌐 **Access Application**\nBrowser / URL"]
+    WH["🔔 **Webhook / Users**\nNotified! ✅"]
 
     EC2 --> GH --> DOC --> DC --> JEN
     JEN --> SH
     SH --> IMG --> CON --> ACC --> WH
+
+    EC2 ~~~ WH
+    GH ~~~ ACC
+    DOC ~~~ CON
+    DC ~~~ IMG
 
     style EC2 fill:#FFF3E0,stroke:#FF9900,stroke-width:2px,color:#E65100
     style GH  fill:#F5F5F5,stroke:#333,stroke-width:2px,color:#24292E
@@ -32,7 +30,4 @@ flowchart LR
     style CON fill:#E8F5E9,stroke:#2e7d32,stroke-width:2px,color:#1B5E20
     style ACC fill:#F3E5F5,stroke:#7b1fa2,stroke-width:2px,color:#4A148C
     style WH  fill:#EDE7F6,stroke:#6c5ce7,stroke-width:2px,color:#4527A0
-
-    style TOP fill:transparent,stroke:#444,stroke-dasharray:5 5
-    style BOT fill:transparent,stroke:#444,stroke-dasharray:5 5
 ```
